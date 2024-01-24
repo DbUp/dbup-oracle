@@ -1,4 +1,7 @@
-﻿
+﻿[assembly: System.CLSCompliantAttribute(true)]
+[assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
+[assembly: System.Runtime.InteropServices.GuidAttribute("4f62ae2f-797b-488d-a71e-f27873167fa1")]
+
 namespace DbUp.Oracle
 {
     [System.ObsoleteAttribute()]
