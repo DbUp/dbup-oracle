@@ -1,4 +1,4 @@
-[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/DbUp/dbup-oracle/CI/main)](https://github.com/DbUp/dbup-oracle/actions/workflows/main.yml?query=branch%3Amain)
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/DbUp/dbup-oracle/main.yml?branch=main)](https://github.com/DbUp/dbup-oracle/actions/workflows/main.yml?query=branch%3Amain)
 [![NuGet](https://img.shields.io/nuget/dt/dbup-oracle.svg)](https://www.nuget.org/packages/dbup-oracle)
 [![NuGet](https://img.shields.io/nuget/v/dbup-oracle.svg)](https://www.nuget.org/packages/dbup-oracle)
 [![Prerelease](https://img.shields.io/nuget/vpre/dbup-oracle?color=orange&label=prerelease)](https://www.nuget.org/packages/dbup-oracle)
