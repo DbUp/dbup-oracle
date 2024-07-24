@@ -6,7 +6,7 @@
     <Company>DbUp Contributors</Company>
     <Product>DbUp</Product>
     <Copyright>Copyright © DbUp Contributors 2015</Copyright>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>dbup-oracle</AssemblyName>
     <RootNamespace>DbUp.Oracle</RootNamespace>
     <PackageId>dbup-oracle</PackageId>
@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="dbup-core" Version="6.0.0-beta.108"/>
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.200" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.5.0" />
   </ItemGroup>
 
   <ItemGroup>
