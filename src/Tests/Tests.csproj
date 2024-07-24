@@ -4,7 +4,7 @@
     <TargetFramework>net8</TargetFramework>
     <AssemblyName>Tests</AssemblyName>
     <RootNamespace>DbUp.Oracle.Tests</RootNamespace>
-    <!--    <ImplicitUsings>enable</ImplicitUsings> Can't use implict usings with net46 -->
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

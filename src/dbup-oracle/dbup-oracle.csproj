@@ -16,6 +16,12 @@
     <PackageIcon>dbup-icon.png</PackageIcon>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(CI)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild> <!-- Perform a deterministic build, so our binaries aren't impacted by build server environmental factors (e.g. file paths). -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources> <!-- Embed source files that are not tracked by the source control manager in the PDB -->
+    <DebugType>embedded</DebugType> <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="dbup-core" Version="6.0.0-beta.108"/>
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.5.0" />
