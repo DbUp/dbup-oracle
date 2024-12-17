@@ -33,6 +33,7 @@ namespace DbUp.Oracle
     }
     public static class OracleExtensions
     {
+        public static DbUp.Builder.UpgradeEngineBuilder JournalToOracleTable(this DbUp.Builder.UpgradeEngineBuilder builder, string schema, string table) { }
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(DbUp.Engine.Transactions.IConnectionManager connectionManager) { }
         [System.ObsoleteAttribute("Use OracleDatabaseWithDefaultDelimiter, OracleDatabaseWithSemicolonDelimiter or the OracleDatabase with the delimiter parameter instead, see https://github.com/DbUp/DbUp/pull/335")]
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(this DbUp.Builder.SupportedDatabases supported, string connectionString) { }
