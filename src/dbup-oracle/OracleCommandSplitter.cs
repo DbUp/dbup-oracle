@@ -1,19 +1,29 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DbUp.Support;
 
 namespace DbUp.Oracle
 {
+    /// <summary>
+    /// Splits Oracle SQL scripts into individual commands using configurable delimiters.
+    /// </summary>
     public class OracleCommandSplitter
     {
         private readonly Func<string, SqlCommandReader> commandReaderFactory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OracleCommandSplitter"/> class using the default semicolon delimiter.
+        /// </summary>
         [Obsolete]
         public OracleCommandSplitter()
         {
             this.commandReaderFactory = scriptContents => new OracleCommandReader(scriptContents);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OracleCommandSplitter"/> class using a custom delimiter.
+        /// </summary>
+        /// <param name="delimiter">The delimiter character to use for splitting commands.</param>
         public OracleCommandSplitter(char delimiter)
         {
             this.commandReaderFactory = scriptContents => new OracleCustomDelimiterCommandReader(scriptContents, delimiter);

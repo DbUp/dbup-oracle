@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using DbUp.Builder;
 using DbUp.Engine.Transactions;
@@ -6,6 +6,9 @@ using DbUp.Engine.Transactions;
 namespace DbUp.Oracle
 {
 #pragma warning disable IDE0060 // Remove unused parameter - The "SupportedDatabases" parameter is never used.
+    /// <summary>
+    /// Configuration extension methods for Oracle.
+    /// </summary>
     public static class OracleExtensions
     {
         /// <summary>
@@ -81,6 +84,7 @@ namespace DbUp.Oracle
         /// </summary>
         /// <param name="supported">Fluent helper type.</param>
         /// <param name="connectionString">The connection string.</param>
+        /// <param name="schema">Which Oracle schema to check for changes.</param>
         /// <param name="delimiter">Character to use as the delimiter between statements.</param>
         /// <returns>
         /// A builder for a database upgrader designed for Oracle databases.
@@ -111,6 +115,7 @@ namespace DbUp.Oracle
         /// <param name="supported">Fluent helper type.</param>
         /// <param name="connectionString">Oracle database connection string.</param>
         /// <param name="schema">Which Oracle schema to check for changes</param>
+        /// <param name="delimiter">Character to use as the delimiter between statements.</param>
         /// <returns>
         /// A builder for a database upgrader designed for Oracle databases.
         /// </returns>

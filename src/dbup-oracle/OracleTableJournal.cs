@@ -1,12 +1,17 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Globalization;
+using DbUp.Engine;
 using DbUp.Engine.Output;
 using DbUp.Engine.Transactions;
 using DbUp.Support;
 
 namespace DbUp.Oracle
 {
+    /// <summary>
+    /// An implementation of the <see cref="IJournal"/> interface which tracks version numbers for an
+    /// Oracle database using a table called SchemaVersions.
+    /// </summary>
     public class OracleTableJournal : TableJournal
     {
         bool journalExists;
@@ -22,8 +27,12 @@ namespace DbUp.Oracle
         {
         }
 
+        /// <summary>
+        /// English culture info used for formatting.
+        /// </summary>
         public static CultureInfo English = new CultureInfo("en-US", false);
 
+        /// <inheritdoc/>
         protected override string CreateSchemaTableSql(string quotedPrimaryKeyName)
         {
             var fqSchemaTableName = UnquotedSchemaTableName;
@@ -37,12 +46,20 @@ namespace DbUp.Oracle
                 )";
         }
 
+        /// <summary>
+        /// Creates the SQL for the sequence used by the schema table.
+        /// </summary>
+        /// <returns>The SQL statement to create the sequence.</returns>
         protected string CreateSchemaTableSequenceSql()
         {
             var fqSchemaTableName = UnquotedSchemaTableName;
             return $@" CREATE SEQUENCE {fqSchemaTableName}_sequence";
         }
 
+        /// <summary>
+        /// Creates the SQL for the trigger used by the schema table.
+        /// </summary>
+        /// <returns>The SQL statement to create the trigger.</returns>
         protected string CreateSchemaTableTriggerSql()
         {
             var fqSchemaTableName = UnquotedSchemaTableName;
@@ -57,24 +74,32 @@ namespace DbUp.Oracle
                 ";
         }
 
+        /// <inheritdoc/>
         protected override string GetInsertJournalEntrySql(string scriptName, string applied)
         {
             var unquotedSchemaTableName = UnquotedSchemaTableName.ToUpper(English);
             return $"insert into {unquotedSchemaTableName} (ScriptName, Applied) values (:" + scriptName.Replace("@", "") + ",:" + applied.Replace("@", "") + ")";
         }
 
+        /// <inheritdoc/>
         protected override string GetJournalEntriesSql()
         {
             var unquotedSchemaTableName = UnquotedSchemaTableName.ToUpper(English);
             return $"select scriptname from {unquotedSchemaTableName} order by scriptname";
         }
 
+        /// <inheritdoc/>
         protected override string DoesTableExistSql()
         {
             var unquotedSchemaTableName = UnquotedSchemaTableName.ToUpper(English);
             return $"select 1 from user_tables where table_name = '{unquotedSchemaTableName}'";
         }
 
+        /// <summary>
+        /// Gets the command to create the sequence for the schema table.
+        /// </summary>
+        /// <param name="dbCommandFactory">Factory to create database commands.</param>
+        /// <returns>A command to create the sequence.</returns>
         protected IDbCommand GetCreateTableSequence(Func<IDbCommand> dbCommandFactory)
         {
             var command = dbCommandFactory();
@@ -83,6 +108,11 @@ namespace DbUp.Oracle
             return command;
         }
 
+        /// <summary>
+        /// Gets the command to create the trigger for the schema table.
+        /// </summary>
+        /// <param name="dbCommandFactory">Factory to create database commands.</param>
+        /// <returns>A command to create the trigger.</returns>
         protected IDbCommand GetCreateTableTrigger(Func<IDbCommand> dbCommandFactory)
         {
             var command = dbCommandFactory();
@@ -91,6 +121,7 @@ namespace DbUp.Oracle
             return command;
         }
 
+        /// <inheritdoc/>
         public override void EnsureTableExistsAndIsLatestVersion(Func<IDbCommand> dbCommandFactory)
         {
             if (!journalExists && !DoesTableExist(dbCommandFactory))
