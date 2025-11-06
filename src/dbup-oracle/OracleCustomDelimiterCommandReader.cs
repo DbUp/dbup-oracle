@@ -1,9 +1,12 @@
-﻿using System;
+using System;
 using System.Text;
 using DbUp.Support;
 
 namespace DbUp.Oracle
 {
+    /// <summary>
+    /// Reads Oracle commands from an underlying text stream using a custom delimiter. Supports DELIMITER statements.
+    /// </summary>
     public class OracleCustomDelimiterCommandReader : SqlCommandReader
     {
         const string DelimiterKeyword = "DELIMITER";
@@ -18,6 +21,7 @@ namespace DbUp.Oracle
         /// <summary>
         /// Hook to support custom statements
         /// </summary>
+        /// <inheritdoc/>
         protected override bool IsCustomStatement
             => TryPeek(DelimiterKeyword.Length - 1, out var statement) &&
                string.Equals(DelimiterKeyword, CurrentChar + statement, StringComparison.OrdinalIgnoreCase) &&
@@ -26,6 +30,7 @@ namespace DbUp.Oracle
         /// <summary>
         /// Read a custom statement
         /// </summary>
+        /// <inheritdoc/>
         protected override void ReadCustomStatement()
         {
             // Move past Delimiter keyword

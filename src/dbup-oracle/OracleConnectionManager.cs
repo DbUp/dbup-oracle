@@ -1,10 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DbUp.Engine.Transactions;
 using Oracle.ManagedDataAccess.Client;
 
 namespace DbUp.Oracle
 {
+    /// <summary>
+    /// Manages Oracle database connections.
+    /// </summary>
     public class OracleConnectionManager : DatabaseConnectionManager
     {
         private readonly OracleCommandSplitter commandSplitter;
@@ -31,6 +34,7 @@ namespace DbUp.Oracle
             this.commandSplitter = commandSplitter;
         }
 
+        /// <inheritdoc/>
         public override IEnumerable<string> SplitScriptIntoCommands(string scriptContents)
         {
             var scriptStatements = commandSplitter.SplitScriptIntoCommands(scriptContents);

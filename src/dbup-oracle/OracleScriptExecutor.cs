@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DbUp.Engine;
 using DbUp.Engine.Output;
@@ -8,6 +8,9 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace DbUp.Oracle
 {
+    /// <summary>
+    /// An implementation of <see cref="ScriptExecutor"/> that executes against an Oracle database.
+    /// </summary>
     public class OracleScriptExecutor : ScriptExecutor
     {
         /// <summary>
@@ -25,6 +28,7 @@ namespace DbUp.Oracle
         {
         }
 
+        /// <inheritdoc/>
         protected override string GetVerifySchemaSql(string schema)
         {
             throw new NotSupportedException();
@@ -39,6 +43,7 @@ namespace DbUp.Oracle
             Execute(script, null);
         }
 
+        /// <inheritdoc/>
         protected override void ExecuteCommandsWithinExceptionHandler(int index, SqlScript script, Action executeCommand)
         {
             try
