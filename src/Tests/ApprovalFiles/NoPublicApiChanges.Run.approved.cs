@@ -1,11 +1,12 @@
-﻿[assembly: System.CLSCompliantAttribute(true)]
-[assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
-[assembly: System.Runtime.InteropServices.GuidAttribute("4f62ae2f-797b-488d-a71e-f27873167fa1")]
-
+﻿[assembly: System.CLSCompliant(true)]
+[assembly: System.Reflection.AssemblyMetadata("RepositoryUrl", "https://github.com/DbUp/dbup-oracle.git")]
+[assembly: System.Runtime.InteropServices.ComVisible(false)]
+[assembly: System.Runtime.InteropServices.Guid("4f62ae2f-797b-488d-a71e-f27873167fa1")]
+[assembly: System.Runtime.Versioning.TargetFramework(".NETStandard,Version=v2.1", FrameworkDisplayName=".NET Standard 2.1")]
 namespace DbUp.Oracle
 {
-    [System.ObsoleteAttribute()]
-    public class OracleCommandReader : DbUp.Support.SqlCommandReader, System.IDisposable
+    [System.Obsolete]
+    public class OracleCommandReader : DbUp.Support.SqlCommandReader
     {
         public OracleCommandReader(string sqlText) { }
         protected override bool IsCustomStatement { get; }
@@ -13,19 +14,20 @@ namespace DbUp.Oracle
     }
     public class OracleCommandSplitter
     {
-        [System.ObsoleteAttribute()]
+        [System.Obsolete]
         public OracleCommandSplitter() { }
         public OracleCommandSplitter(char delimiter) { }
         public System.Collections.Generic.IEnumerable<string> SplitScriptIntoCommands(string scriptContents) { }
     }
-    public class OracleConnectionManager : DbUp.Engine.Transactions.DatabaseConnectionManager, DbUp.Engine.Transactions.IConnectionManager
+    public class OracleConnectionManager : DbUp.Engine.Transactions.DatabaseConnectionManager
     {
-        [System.ObsoleteAttribute("Use OracleConnectionManager(string, OracleCommandSplitter) and supply an appropriate command splitter instance.")]
+        [System.Obsolete("Use OracleConnectionManager(string, OracleCommandSplitter) and supply an appropri" +
+            "ate command splitter instance.")]
         public OracleConnectionManager(string connectionString) { }
         public OracleConnectionManager(string connectionString, DbUp.Oracle.OracleCommandSplitter commandSplitter) { }
         public override System.Collections.Generic.IEnumerable<string> SplitScriptIntoCommands(string scriptContents) { }
     }
-    public class OracleCustomDelimiterCommandReader : DbUp.Support.SqlCommandReader, System.IDisposable
+    public class OracleCustomDelimiterCommandReader : DbUp.Support.SqlCommandReader
     {
         public OracleCustomDelimiterCommandReader(string sqlText, char delimiter) { }
         protected override bool IsCustomStatement { get; }
@@ -35,20 +37,25 @@ namespace DbUp.Oracle
     {
         public static DbUp.Builder.UpgradeEngineBuilder JournalToOracleTable(this DbUp.Builder.UpgradeEngineBuilder builder, string schema, string table) { }
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(DbUp.Engine.Transactions.IConnectionManager connectionManager) { }
-        [System.ObsoleteAttribute("Use OracleDatabaseWithDefaultDelimiter, OracleDatabaseWithSemicolonDelimiter or the OracleDatabase with the delimiter parameter instead, see https://github.com/DbUp/DbUp/pull/335")]
-        public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(this DbUp.Builder.SupportedDatabases supported, string connectionString) { }
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(this DbUp.Builder.SupportedDatabases supported, DbUp.Engine.Transactions.IConnectionManager connectionManager) { }
+        [System.Obsolete("Use OracleDatabaseWithDefaultDelimiter, OracleDatabaseWithSemicolonDelimiter or t" +
+            "he OracleDatabase with the delimiter parameter instead, see https://github.com/D" +
+            "bUp/DbUp/pull/335")]
+        public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(this DbUp.Builder.SupportedDatabases supported, string connectionString) { }
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(DbUp.Engine.Transactions.IConnectionManager connectionManager, string schema) { }
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(this DbUp.Builder.SupportedDatabases supported, string connectionString, char delimiter) { }
-        [System.ObsoleteAttribute("Use the parameter that takes a delimiter instead, see https://github.com/DbUp/DbUp/pull/335")]
+        [System.Obsolete("Use the parameter that takes a delimiter instead, see https://github.com/DbUp/DbU" +
+            "p/pull/335")]
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(this DbUp.Builder.SupportedDatabases supported, string connectionString, string schema) { }
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(this DbUp.Builder.SupportedDatabases supported, string connectionString, string schema, char delimiter) { }
-        [System.ObsoleteAttribute("Use OracleDatabaseWithDefaultDelimiter, OracleDatabaseWithSemicolonDelimiter or the OracleDatabase with the delimiter parameter instead, see https://github.com/DbUp/DbUp/pull/335")]
+        [System.Obsolete("Use OracleDatabaseWithDefaultDelimiter, OracleDatabaseWithSemicolonDelimiter or t" +
+            "he OracleDatabase with the delimiter parameter instead, see https://github.com/D" +
+            "bUp/DbUp/pull/335")]
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabase(this DbUp.Builder.SupportedDatabases supported, string connectionString, string schema, string delimiter) { }
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabaseWithDefaultDelimiter(this DbUp.Builder.SupportedDatabases supported, string connectionString) { }
         public static DbUp.Builder.UpgradeEngineBuilder OracleDatabaseWithSemicolonDelimiter(this DbUp.Builder.SupportedDatabases supported, string connectionString) { }
     }
-    public class OracleObjectParser : DbUp.Support.SqlObjectParser, DbUp.Engine.ISqlObjectParser
+    public class OracleObjectParser : DbUp.Support.SqlObjectParser
     {
         public OracleObjectParser() { }
     }
@@ -57,14 +64,14 @@ namespace DbUp.Oracle
         public OraclePreprocessor() { }
         public string Process(string contents) { }
     }
-    public class OracleScriptExecutor : DbUp.Support.ScriptExecutor, DbUp.Engine.IScriptExecutor
+    public class OracleScriptExecutor : DbUp.Support.ScriptExecutor
     {
         public OracleScriptExecutor(System.Func<DbUp.Engine.Transactions.IConnectionManager> connectionManagerFactory, System.Func<DbUp.Engine.Output.IUpgradeLog> log, string schema, System.Func<bool> variablesEnabled, System.Collections.Generic.IEnumerable<DbUp.Engine.IScriptPreprocessor> scriptPreprocessors, System.Func<DbUp.Engine.IJournal> journalFactory) { }
         public override void Execute(DbUp.Engine.SqlScript script) { }
         protected override void ExecuteCommandsWithinExceptionHandler(int index, DbUp.Engine.SqlScript script, System.Action executeCommand) { }
         protected override string GetVerifySchemaSql(string schema) { }
     }
-    public class OracleTableJournal : DbUp.Support.TableJournal, DbUp.Engine.IJournal
+    public class OracleTableJournal : DbUp.Support.TableJournal
     {
         public static System.Globalization.CultureInfo English;
         public OracleTableJournal(System.Func<DbUp.Engine.Transactions.IConnectionManager> connectionManager, System.Func<DbUp.Engine.Output.IUpgradeLog> logger, string schema, string table) { }
