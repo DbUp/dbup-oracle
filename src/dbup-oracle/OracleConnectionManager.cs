@@ -12,6 +12,8 @@ namespace DbUp.Oracle
     {
         private readonly OracleCommandSplitter commandSplitter;
 
+        protected override string GetDummyQuery() => "select 1 from dual";
+
         /// <summary>
         /// Creates a new Oracle database connection manager.
         /// </summary>
