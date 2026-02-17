@@ -25,6 +25,7 @@ namespace DbUp.Oracle
             "ate command splitter instance.")]
         public OracleConnectionManager(string connectionString) { }
         public OracleConnectionManager(string connectionString, DbUp.Oracle.OracleCommandSplitter commandSplitter) { }
+        protected override string GetDummyQuery() { }
         public override System.Collections.Generic.IEnumerable<string> SplitScriptIntoCommands(string scriptContents) { }
     }
     public class OracleCustomDelimiterCommandReader : DbUp.Support.SqlCommandReader
