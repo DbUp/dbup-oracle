@@ -12,6 +12,9 @@ namespace DbUp.Oracle
     {
         private readonly OracleCommandSplitter commandSplitter;
 
+        /// <summary>
+        /// Gets a dummy query used to test the connection.
+        /// </summary>
         protected override string GetDummyQuery() => "select 1 from dual";
 
         /// <summary>
